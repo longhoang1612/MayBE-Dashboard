@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">MayBE DashBoard</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Kho hàng</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_payment">Thanh toán</string>
+    <string name="title_delivery">Đơn hàng</string>
+    <string name="title_search">Tìm kiếm sản phẩm</string>
+    <string name="title_add_new">Thêm mới sản phẩm</string>
+    <string name="add_title_item">Tên sản phẩm *</string>
+    <string name="hint_add_title_item">Tên của sản phẩm</string>
+    <string name="add_image_item">Ảnh sản phẩm *</string>
+    <string name="add_title">Tiêu đề</string>
+    <string name="add_category">Danh mục sản phẩm *</string>
+    <string name="add_category_default">Điện thoại</string>
+    <string name="cb_phone">Điện thoại</string>
+    <string name="cb_tablet">Tablet</string>
+    <string name="cb_laptop">Laptop</string>
+    <string name="cb_accessories">Phụ kiện</string>
+    <string name="cb_oclock">Đồng hồ</string>
+    <string name="add_info_item">Thông số kỹ thuật *</string>
+    <string name="add_info">Thông số sản phẩm</string>
+    <string name="add_price_item">Giá sản phẩm * (vnđ)</string>
+    <string name="hint_price_item">Giá của sản phẩm</string>
+    <string name="add_description_item">Mô tả chi tiết sản phẩm</string>
+    <string name="title_des">Mô tả sản phẩm *</string>
+    <string name="hint_title_des">Tiêu đề bài mô tả</string>
+    <string name="title_des_1">Tiêu đề</string>
+    <string name="hint_add_sale">Thêm khuyến mãi vào đây</string>
+    <string name="add_title_sale">khuyến mãi *</string>
+    <string name="hint_video">Link video của sản phẩm</string>
+    <string name="title_video">Link video</string>
+    <string name="title_slider">Danh sách ảnh</string>
+</resources>
