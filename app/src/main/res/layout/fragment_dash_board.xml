@@ -7,9 +7,10 @@
     android:background="@color/color_white"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".DashBoardFragment">
+    tools:context=".screen.dashboard.DashBoardFragment">
 
     <RelativeLayout
+        android:id="@+id/relative_search"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_55"
         android:background="#03a9f5"
@@ -35,10 +36,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/dimen_10"
-                    android:layout_marginLeft="@dimen/dimen_10"
                     android:src="@drawable/ic_search_black_24dp" />
 
-                <EditText
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -66,14 +66,86 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_new"
-        android:src="@drawable/ic_add_black_24dp"
+    <ProgressBar
+        android:id="@+id/progress_dashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relative_search"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dimen_60"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/dimen_76"
-        android:layout_marginEnd="@dimen/dimen_16"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relative_search">
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/linear_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10"
+                android:fontFamily="@font/sanfranciscodisplay_medium"
+                android:text="Danh mục sản phẩm"
+                android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/text_category"
+                app:spanCount="3" />
+
+            <TextView
+                android:id="@+id/text_all_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10"
+                android:fontFamily="@font/sanfranciscodisplay_medium"
+                android:text="Tất cả các sản phẩm"
+                android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_category" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_all_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10"
+                android:layout_marginBottom="8dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_all_item"
+                app:spanCount="2"
+                tools:layout_editor_absoluteX="10dp" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_16"
+        android:layout_marginBottom="@dimen/dimen_60"
+        android:src="@drawable/ic_add_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
+

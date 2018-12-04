@@ -20,4 +20,7 @@
     <dimen name="dimen_4">4dp</dimen>
     <dimen name="dimen_200">200dp</dimen>
     <dimen name="dimen_50">50dp</dimen>
+    <dimen name="dimen_2">2dp</dimen>
+    <dimen name="dimen_150dp">150dp</dimen>
+    <dimen name="dimen_12sp">12sp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.hoanglong.junadminstore;
+package com.hoanglong.junadminstore.screen.main;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,8 +6,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
+
+import com.hoanglong.junadminstore.screen.delivery.DeliveryFragment;
+import com.hoanglong.junadminstore.screen.payment.PaymentFragment;
+import com.hoanglong.junadminstore.screen.dashboard.DashBoardFragment;
+import com.hoanglong.junadminstore.utils.FragmentTransactionUtils;
+import com.hoanglong.junadminstore.R;
 
 public class MainActivity extends AppCompatActivity {
 

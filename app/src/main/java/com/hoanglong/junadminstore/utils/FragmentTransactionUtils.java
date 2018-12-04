@@ -1,4 +1,4 @@
-package com.hoanglong.junadminstore;
+package com.hoanglong.junadminstore.utils;
 
 import android.support.annotation.AnimRes;
 import android.support.v4.app.Fragment;

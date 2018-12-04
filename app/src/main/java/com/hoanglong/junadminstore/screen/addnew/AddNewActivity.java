@@ -1,9 +1,10 @@
-package com.hoanglong.junadminstore;
+package com.hoanglong.junadminstore.screen.addnew;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.hoanglong.junadminstore.R;
 import com.hoanglong.junadminstore.base.BaseActivity;
 
 import butterknife.BindView;
