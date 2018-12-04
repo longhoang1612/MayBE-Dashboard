@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".screen.phone.detail_product.ContentDetailActivity">
+
+        <RelativeLayout
+            android:id="@+id/toolbar_detail"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/ic_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/dimen_16"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+
+            <TextView
+                android:textSize="@dimen/dimen_16sp"
+                android:id="@+id/text_title_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/ic_back"
+                android:fontFamily="@font/sanfranciscodisplay_regular"
+                android:textColor="@color/color_white" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/text_title_h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_5"
+            android:fontFamily="@font/sanfranciscodisplay_medium"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_5"
+            android:orientation="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

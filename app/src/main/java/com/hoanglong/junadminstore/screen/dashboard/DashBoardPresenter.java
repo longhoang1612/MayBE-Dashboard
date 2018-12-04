@@ -25,7 +25,7 @@ public class DashBoardPresenter implements DashBoardContract.Presenter {
             @Override
             public void getDataSuccess(PhoneProduct data) {
                 mView.hideProgressBar();
-                mView.onGetAllItem(data);
+                mView.onAllItemsSuccess(data);
             }
 
             @Override

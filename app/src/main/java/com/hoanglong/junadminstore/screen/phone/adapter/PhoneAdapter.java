@@ -1,4 +1,4 @@
-package com.hoanglong.junadminstore.screen.dashboard;
+package com.hoanglong.junadminstore.screen.phone.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,7 +16,6 @@ import com.hoanglong.junadminstore.R;
 import com.hoanglong.junadminstore.data.model.phone_product.ItemPhoneProduct;
 
 import java.util.List;
-
 
 public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ItemPhoneViewHolder> {
 

@@ -34,4 +34,22 @@
     <string name="hint_video">Link video của sản phẩm</string>
     <string name="title_video">Link video</string>
     <string name="title_slider">Danh sách ảnh</string>
+    <string name="title_category_phone">Danh mục sản phẩm</string>
+    <string name="product_hot">Sản phẩm nổi bật</string>
+    <string name="see_more">Xem tất cả</string>
+    <string name="see_all">Xem tất cả</string>
+    <string name="xem_chi_tiet">Xem chi tiết</string>
+    <string name="thong_tin_chi_tiet">Thông tin chi tiết</string>
+    <string name="phu_kien_di_kem">Ưu đãi khi mua phụ kiện</string>
+    <string name="title_sale">Sản phẩm khuyến mãi</string>
+    <string name="type_sale">sale</string>
+    <string name="sale">Khuyến mại</string>
+    <string name="default_percent">0%</string>
+    <string name="comment">Viết nhận xét</string>
+    <string name="send">gửi</string>
+    <string name="title_comment">Tiêu đề (không bắt buộc)</string>
+    <string name="title_add_image">Thêm hình sản phẩm thực tế nếu bạn muốn</string>
+    <string name="comment_of_u">Đánh giá của bạn</string>
+    <string name="title_detail_info">Thông tin chi tiết</string>
+
 </resources>

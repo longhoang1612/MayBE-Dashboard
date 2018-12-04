@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/frame_show"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_60"
+    android:layout_height="@dimen/dimen_70"
+    android:layout_margin="@dimen/dimen_10">
+
+    <ImageView
+        android:id="@+id/image_show"
+        android:layout_width="@dimen/dimen_60"
+        android:layout_height="@dimen/dimen_70"
+        />
+
+    <FrameLayout
+        android:background="@drawable/custom_button3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame"/>
+
+</RelativeLayout>

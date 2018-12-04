@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/text_category_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10"
+            android:text="@string/title_category_phone"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_category_phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_phone_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_category_phone" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_category_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:orientation="horizontal"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_category_phone"
+            app:spanCount="2" />
+
+        <TextView
+            android:id="@+id/title_noibat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:text="@string/product_hot"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/button_see_more"
+            app:layout_constraintStart_toStartOf="@+id/text_category_phone"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_category_phone" />
+
+        <Button
+            android:id="@+id/button_see_more"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_margin="@dimen/dimen_10"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/dimen_10"
+            android:text="@string/see_more"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/dimen_12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_phone_noibat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_category_phone" />
+
+        <ProgressBar
+            android:id="@+id/progress_phone_noibat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_see_more" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_phone_noibat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:orientation="vertical"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_noibat"
+            app:spanCount="2" />
+
+        <FrameLayout
+            android:elevation="@dimen/dimen_10"
+            android:id="@+id/frame_detail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

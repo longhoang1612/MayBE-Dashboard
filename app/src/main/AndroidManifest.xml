@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hoanglong.junadminstore">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen.addnew.AddNewActivity"></activity>
+        <activity android:name=".screen.addnew.AddNewActivity" />
+        <activity android:name=".screen.phone.phone_category.PhoneCategoryFragment" />
+        <activity android:name=".screen.phone.detail_product.DetailProductActivity" />
+        <activity android:name=".screen.phone.detail_product.InfoDetailActivity" />
+        <activity android:name=".screen.phone.detail_product.ContentDetailActivity"/>
     </application>
 
 </manifest>

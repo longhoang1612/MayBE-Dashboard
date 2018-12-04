@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DashBoardContract {
     interface View {
-        void onGetAllItem(PhoneProduct phoneProduct);
+        void onAllItemsSuccess(PhoneProduct phoneProduct);
 
         void hideProgressBar();
 

@@ -4,10 +4,12 @@ package com.hoanglong.junadminstore.screen.dashboard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.hoanglong.junadminstore.R;
 import com.hoanglong.junadminstore.base.BaseFragment;
@@ -19,6 +21,10 @@ import com.hoanglong.junadminstore.data.repository.HomeRepository;
 import com.hoanglong.junadminstore.data.source.local.CategoryLocalDataSource;
 import com.hoanglong.junadminstore.data.source.remote.HomeDataSource;
 import com.hoanglong.junadminstore.screen.addnew.AddNewActivity;
+import com.hoanglong.junadminstore.screen.dashboard.adapter.CategoriesAdapter;
+import com.hoanglong.junadminstore.screen.dashboard.adapter.PhoneAdapter;
+import com.hoanglong.junadminstore.screen.phone.phone_category.PhoneCategoryFragment;
+import com.hoanglong.junadminstore.utils.EndlessRecyclerViewScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +49,13 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
     @BindView(R.id.progress_dashboard)
     ProgressBar mProgressDashboard;
 
+    private static final int LIMIT = 4;
+    private int mPage = LIMIT;
+    private boolean mIsLoading;
+    private List<ItemPhoneProduct> mItemPhoneProducts;
+    private PhoneAdapter mPhoneAdapter;
+    private DashBoardPresenter mDashBoardPresenter;
+
     @Override
     protected int getLayoutResources() {
         return R.layout.fragment_dash_board;
@@ -62,10 +75,41 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
         CategoryLocalDataSource localDataSource = CategoryLocalDataSource.getInstance();
         CategoryRepository categoryRepository = CategoryRepository.getInstance(localDataSource);
 
-        DashBoardPresenter dashBoardPresenter = new DashBoardPresenter(categoryRepository, homeRepository);
-        dashBoardPresenter.setView(this);
-        dashBoardPresenter.getCategoryHome();
-        dashBoardPresenter.getAllItems();
+        mDashBoardPresenter = new DashBoardPresenter(categoryRepository, homeRepository);
+        mDashBoardPresenter.setView(this);
+        mDashBoardPresenter.getCategoryHome();
+        initRecyclerView();
+        loadData();
+    }
+
+    private void initRecyclerView() {
+        mItemPhoneProducts = new ArrayList<>();
+        mPhoneAdapter = new PhoneAdapter(mItemPhoneProducts, this);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == mItemPhoneProducts.size() - 1) {
+                    return 2;
+                } else {
+                    return 1;
+                }
+            }
+        });
+        mRecyclerAllItem.setLayoutManager(gridLayoutManager);
+        mRecyclerAllItem.setAdapter(mPhoneAdapter);
+
+        mRecyclerAllItem.addOnScrollListener(new EndlessRecyclerViewScrollListener(
+                gridLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                if (mIsLoading) {
+                    return;
+                }
+                mPage += LIMIT;
+                loadData();
+            }
+        });
     }
 
     @Override
@@ -79,12 +123,34 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
     }
 
     @Override
-    public void onGetAllItem(PhoneProduct phoneProduct) {
-        List<ItemPhoneProduct> itemPhoneProducts = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            itemPhoneProducts.add(phoneProduct.getPhoneProduct().get(i));
+    public void onAllItemsSuccess(PhoneProduct phoneProduct) {
+        if (phoneProduct == null) {
+            return;
         }
-        mRecyclerAllItem.setAdapter(new PhoneAdapter(itemPhoneProducts, this));
+
+        mPhoneAdapter.removeLoadingIndicator();
+        mPhoneAdapter.clearData();
+
+        List<ItemPhoneProduct> itemPhoneProducts = new ArrayList<>();
+        if (mPage > phoneProduct.getPhoneProduct().size()) {
+            Toast.makeText(getContext(), "Đã hết sản phẩm", Toast.LENGTH_SHORT).show();
+        } else {
+            for (int i = 0; i < mPage; i++) {
+                itemPhoneProducts.add(phoneProduct.getPhoneProduct().get(i));
+            }
+        }
+
+        mPhoneAdapter.addData(itemPhoneProducts);
+        mIsLoading = false;
+    }
+
+    private void loadData() {
+        if (mIsLoading) {
+            return;
+        }
+        mPhoneAdapter.addLoadingIndicator();
+        mDashBoardPresenter.getAllItems();
+        mIsLoading = true;
     }
 
     @Override
@@ -106,7 +172,17 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onClickItem(Category category) {
-
+//        if (getFragmentManager() != null) {
+//            FragmentTransactionUtils.addFragment(
+//                    getFragmentManager(),
+//                    PhoneCategoryFragment.newInstance(category),
+//                    R.id.frame_home,
+//                    PhoneCategoryFragment.TAG,
+//                    true, -1, -1);
+//        }
+        Intent intent = new Intent(getActivity(),PhoneCategoryFragment.class);
+        intent.putExtra(PhoneCategoryFragment.BUNDLE_CATEGORY,category);
+        startActivity(intent);
     }
 
     @Override
