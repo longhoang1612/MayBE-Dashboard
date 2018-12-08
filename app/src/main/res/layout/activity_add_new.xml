@@ -99,20 +99,22 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:background="#e7e1e1"
+            android:id="@+id/relative_choose_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_200"
             android:layout_marginStart="@dimen/dimen_10"
             android:layout_marginEnd="@dimen/dimen_10">
 
             <ImageView
-                android:id="@+id/choose_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#e7e1e1"
+                android:layout_centerInParent="true"
+                android:id="@+id/image_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:scaleType="centerCrop" />
 
             <ImageView
-                android:id="@+id/image_item"
+                android:id="@+id/choose_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
@@ -548,7 +550,9 @@
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/lv_how"
+            android:orientation="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:id="@+id/recycler_add_sale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_10"
@@ -672,7 +676,7 @@
             app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
         <Button
-            android:id="@+id/btn_send_recipes"
+            android:id="@+id/button_upload"
             android:layout_width="@dimen/dimen_200"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

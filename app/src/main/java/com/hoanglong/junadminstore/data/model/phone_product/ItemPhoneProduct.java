@@ -52,9 +52,9 @@ public class ItemPhoneProduct implements Parcelable {
     @SerializedName("detailContent")
     @Expose
     private List<DetailContent> detailContent = null;
-    @SerializedName("listParameter")
+    @SerializedName("mParameter")
     @Expose
-    private List<ListParameter> listParameter = null;
+    private List<Parameter> mParameter = null;
     @SerializedName("listExtraProduct")
     @Expose
     private List<ListExtraProduct> listExtraProduct = null;
@@ -92,7 +92,7 @@ public class ItemPhoneProduct implements Parcelable {
         slider = in.createStringArrayList();
         listSale = in.createStringArrayList();
         linkVideo = in.readString();
-        listParameter = in.createTypedArrayList(ListParameter.CREATOR);
+        mParameter = in.createTypedArrayList(Parameter.CREATOR);
         listExtraProduct = in.createTypedArrayList(ListExtraProduct.CREATOR);
         detailContent = in.createTypedArrayList(DetailContent.CREATOR);
     }
@@ -114,7 +114,7 @@ public class ItemPhoneProduct implements Parcelable {
         itemPhoneBuilder.v = v;
         itemPhoneBuilder.slider = null;
         itemPhoneBuilder.detailContent = detailContent;
-        itemPhoneBuilder.listParameter = listParameter;
+        itemPhoneBuilder.mParameter = mParameter;
         itemPhoneBuilder.listExtraProduct = listExtraProduct;
         itemPhoneBuilder.listSale = listSale;
         itemPhoneBuilder.linkVideo=linkVideo;
@@ -136,7 +136,7 @@ public class ItemPhoneProduct implements Parcelable {
         private Integer v;
         private List<String> slider = null;
         private List<DetailContent> detailContent = null;
-        private List<ListParameter> listParameter = null;
+        private List<Parameter> mParameter = null;
         private List<ListExtraProduct> listExtraProduct = null;
         private List<String> listSale = null;
         private String linkVideo;
@@ -206,8 +206,8 @@ public class ItemPhoneProduct implements Parcelable {
             return this;
         }
 
-        public ItemPhoneBuilder setListParameter(List<ListParameter> listParameter) {
-            this.listParameter = listParameter;
+        public ItemPhoneBuilder setParameter(List<Parameter> parameter) {
+            this.mParameter = parameter;
             return this;
         }
 
@@ -352,12 +352,12 @@ public class ItemPhoneProduct implements Parcelable {
         this.detailContent = detailContent;
     }
 
-    public List<ListParameter> getListParameter() {
-        return listParameter;
+    public List<Parameter> getParameter() {
+        return mParameter;
     }
 
-    public void setListParameter(List<ListParameter> listParameter) {
-        this.listParameter = listParameter;
+    public void setParameter(List<Parameter> parameter) {
+        this.mParameter = parameter;
     }
 
     public List<ListExtraProduct> getListExtraProduct() {
@@ -424,7 +424,7 @@ public class ItemPhoneProduct implements Parcelable {
         dest.writeStringList(slider);
         dest.writeStringList(listSale);
         dest.writeString(linkVideo);
-        dest.writeTypedList(listParameter);
+        dest.writeTypedList(mParameter);
         dest.writeTypedList(listExtraProduct);
         dest.writeTypedList(detailContent);
     }

@@ -19,4 +19,11 @@ public class Constant {
         public static final String clock_type = "Đồng hồ thông minh";
         public static final String clock = "Đồng hồ";
     }
+
+    public static class Cloudinary{
+        public static final String CLOUD_NAME = "hoanglongb";
+        public static final String API_KEY = "228499276558135";
+        public static final String SECRET_KEY = "qSDLX0OeyL1Hn25wQTGB5A1gtrY";
+        public static final String URL = "cloudinary://228499276558135:qSDLX0OeyL1Hn25wQTGB5A1gtrY@hoanglongb";
+    }
 }

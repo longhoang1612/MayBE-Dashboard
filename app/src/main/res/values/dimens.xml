@@ -35,4 +35,6 @@
     <dimen name="dimen_90">90dp</dimen>
     <dimen name="dimen_120dp">120dp</dimen>
     <dimen name="dimen_0_5dp">0.5dp</dimen>
+    <dimen name="dimen_18dp">18dp</dimen>
+    <dimen name="dimen_150">150dp</dimen>
 </resources>

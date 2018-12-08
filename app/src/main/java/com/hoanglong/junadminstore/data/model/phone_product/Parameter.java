@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ListParameter implements Parcelable {
+public class Parameter implements Parcelable {
 
     @SerializedName("titlePara")
     @Expose
@@ -18,31 +18,36 @@ public class ListParameter implements Parcelable {
     @Expose
     private String id;
 
-    public static final Creator<ListParameter> CREATOR = new Creator<ListParameter>() {
+    public static final Creator<Parameter> CREATOR = new Creator<Parameter>() {
         @Override
-        public ListParameter createFromParcel(Parcel in) {
-            return new ListParameter(in);
+        public Parameter createFromParcel(Parcel in) {
+            return new Parameter(in);
         }
 
         @Override
-        public ListParameter[] newArray(int size) {
-            return new ListParameter[size];
+        public Parameter[] newArray(int size) {
+            return new Parameter[size];
         }
     };
 
-    public ListParameter(String titlePara, String contentPara, String id) {
+    public Parameter(String titlePara, String contentPara, String id) {
         this.titlePara = titlePara;
         this.contentPara = contentPara;
         this.id = id;
     }
 
-    private ListParameter(Parcel in) {
+    public Parameter(String titlePara, String contentPara) {
+        this.titlePara = titlePara;
+        this.contentPara = contentPara;
+    }
+
+    private Parameter(Parcel in) {
         titlePara = in.readString();
         contentPara = in.readString();
         id = in.readString();
     }
 
-    ListParameter(ListParameterBuilder listParameterBuilder) {
+    Parameter(ListParameterBuilder listParameterBuilder) {
         listParameterBuilder.id = id;
         listParameterBuilder.contentPara = contentPara;
         listParameterBuilder.titlePara = titlePara;
@@ -74,7 +79,7 @@ public class ListParameter implements Parcelable {
 
     @Override
     public String toString() {
-        return "ListParameter{" +
+        return "Parameter{" +
                 "titlePara='" + titlePara + '\'' +
                 ", contentPara='" + contentPara + '\'' +
                 ", id='" + id + '\'' +
@@ -113,8 +118,8 @@ public class ListParameter implements Parcelable {
             return this;
         }
 
-        public ListParameter build() {
-            return new ListParameter(this);
+        public Parameter build() {
+            return new Parameter(this);
         }
     }
 }

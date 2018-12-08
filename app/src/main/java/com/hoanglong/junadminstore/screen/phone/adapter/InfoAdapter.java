@@ -10,17 +10,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hoanglong.junadminstore.R;
-import com.hoanglong.junadminstore.data.model.phone_product.ListParameter;
+import com.hoanglong.junadminstore.data.model.phone_product.Parameter;
 
 import java.util.List;
 
 
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
 
-    private List<ListParameter> mParameterList;
+    private List<Parameter> mParameterList;
     private LayoutInflater mInflater;
 
-    public InfoAdapter(List<ListParameter> parameterList) {
+    public InfoAdapter(List<Parameter> parameterList) {
         mParameterList = parameterList;
     }
 
@@ -36,8 +36,8 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull InfoHolder infoHolder, int i) {
-        ListParameter listParameter = mParameterList.get(i);
-        infoHolder.bindData(listParameter);
+        Parameter parameter = mParameterList.get(i);
+        infoHolder.bindData(parameter);
         if(i%2==1){
             infoHolder.mLinearInfo.setBackgroundColor(Color.parseColor("#fafafa"));
         }
@@ -61,12 +61,12 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
             mLinearInfo = itemView.findViewById(R.id.linear_info);
         }
 
-        void bindData(ListParameter listParameter) {
-            if(listParameter==null){
+        void bindData(Parameter parameter) {
+            if(parameter ==null){
                 return;
             }
-            mTextDetail.setText(listParameter.getContentPara());
-            mTextInfo.setText(listParameter.getTitlePara());
+            mTextDetail.setText(parameter.getContentPara());
+            mTextInfo.setText(parameter.getTitlePara());
         }
     }
 }

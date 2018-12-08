@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.hoanglong.junadminstore.R;
-import com.hoanglong.junadminstore.data.model.phone_product.ListParameter;
+import com.hoanglong.junadminstore.data.model.phone_product.Parameter;
 import com.hoanglong.junadminstore.screen.phone.adapter.InfoAdapter;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class InfoDetailActivity extends AppCompatActivity {
     ImageView mImageBack;
     @BindView(R.id.recycler_info)
     RecyclerView mRecyclerInfo;
-    private List<ListParameter> mParameterList;
+    private List<Parameter> mParameterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

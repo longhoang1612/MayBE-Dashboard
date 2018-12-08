@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.hoanglong.junadminstore.R;
 import com.hoanglong.junadminstore.data.model.phone_product.DetailContent;
 import com.hoanglong.junadminstore.data.model.phone_product.ItemPhoneProduct;
-import com.hoanglong.junadminstore.data.model.phone_product.ListParameter;
+import com.hoanglong.junadminstore.data.model.phone_product.Parameter;
 import com.hoanglong.junadminstore.data.model.phone_product.PhoneProduct;
 import com.hoanglong.junadminstore.screen.phone.adapter.ContentAdapter;
 import com.hoanglong.junadminstore.screen.phone.adapter.ExtraProductAdapter;
@@ -88,7 +88,7 @@ public class DetailProductActivity extends AppCompatActivity
 
     private ItemPhoneProduct itemPhoneProduct;
     private List<DetailContent> mContentListHide;
-    private List<ListParameter> mInfoProducts;
+    private List<Parameter> mInfoProducts;
     private String title;
 
 
@@ -172,12 +172,12 @@ public class DetailProductActivity extends AppCompatActivity
         mRecyclerExtraProduct.setNestedScrollingEnabled(false);
 
         //InFo
-        if (itemPhoneProduct.getListParameter().size() > 3) {
+        if (itemPhoneProduct.getParameter().size() > 3) {
             for (int i = 0; i < 3; i++) {
-                mInfoProducts.add(itemPhoneProduct.getListParameter().get(i));
+                mInfoProducts.add(itemPhoneProduct.getParameter().get(i));
             }
         } else {
-            mInfoProducts.addAll(itemPhoneProduct.getListParameter());
+            mInfoProducts.addAll(itemPhoneProduct.getParameter());
         }
         mRecyclerInfoProduct.setAdapter(
                 new InfoAdapter(mInfoProducts));
@@ -213,7 +213,7 @@ public class DetailProductActivity extends AppCompatActivity
             case R.id.text_see_detail:
                 Intent intentInfo = new Intent(this, InfoDetailActivity.class);
                 intentInfo.putParcelableArrayListExtra(InfoDetailActivity.BUNDLE_INFO,
-                        (ArrayList<? extends Parcelable>) itemPhoneProduct.getListParameter());
+                        (ArrayList<? extends Parcelable>) itemPhoneProduct.getParameter());
                 startActivity(intentInfo);
                 break;
             case R.id.relative_comment:
