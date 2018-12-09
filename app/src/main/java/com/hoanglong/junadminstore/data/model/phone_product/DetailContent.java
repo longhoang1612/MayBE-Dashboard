@@ -18,9 +18,9 @@ public class DetailContent implements Parcelable {
     @Expose
     private String image;
 
-    public DetailContent(String title, String id) {
+    public DetailContent(String title, String image) {
         this.title = title;
-        this.id = id;
+        this.image = image;
     }
 
     public static final Creator<DetailContent> CREATOR = new Creator<DetailContent>() {

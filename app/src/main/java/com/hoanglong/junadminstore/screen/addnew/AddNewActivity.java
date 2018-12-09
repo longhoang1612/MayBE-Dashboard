@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -29,7 +28,12 @@ import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import com.hoanglong.junadminstore.R;
 import com.hoanglong.junadminstore.base.BaseActivity;
+import com.hoanglong.junadminstore.data.model.phone_product.DetailContent;
 import com.hoanglong.junadminstore.data.model.phone_product.Parameter;
+import com.hoanglong.junadminstore.screen.addnew.adapter.AddContentAdapter;
+import com.hoanglong.junadminstore.screen.addnew.adapter.AddInfoAdapter;
+import com.hoanglong.junadminstore.screen.addnew.adapter.AddSaleAdapter;
+import com.hoanglong.junadminstore.screen.addnew.adapter.AddSliderAdapter;
 import com.hoanglong.junadminstore.utils.Constant;
 
 import java.io.ByteArrayOutputStream;
@@ -77,7 +81,18 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
     RecyclerView mRecyclerInfo;
     @BindView(R.id.add_list_info)
     ImageView mImageAddInfo;
-
+    @BindView(R.id.recycler_slider)
+    RecyclerView mRecyclerSlider;
+    @BindView(R.id.relative_add_slider)
+    RelativeLayout mRelativeSlider;
+    @BindView(R.id.et_description)
+    EditText mEditTextContent;
+    @BindView(R.id.image_description)
+    ImageView mImageChooseContent;
+    @BindView(R.id.add_description)
+    ImageView mImageAddContent;
+    @BindView(R.id.recycler_description)
+    RecyclerView mRecyclerDes;
 
     private Uri mPath;
     boolean mIsGallery = true;
@@ -87,8 +102,17 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
     private ProgressDialog mProgressDialog;
     private List<String> mSales = new ArrayList<>();
     private List<Parameter> mParameters = new ArrayList<>();
+    private List<Bitmap> mBitmaps = new ArrayList<>();
+    private List<String> mImageSlider = new ArrayList<>();
+    private List<DetailContent> mDetailContents = new ArrayList<>();
     private AddSaleAdapter mAddSaleAdapter;
     private AddInfoAdapter mAddInfoAdapter;
+    private AddSliderAdapter mAddSliderAdapter;
+    private AddContentAdapter mAddContentAdapter;
+    private ImageView mImageOther;
+    private boolean isImageMain;
+    private boolean isImageSlider;
+    private boolean isImageContent;
 
     @Override
     protected int getLayoutResources() {
@@ -104,6 +128,9 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
         mButtonUpload.setOnClickListener(this);
         mImageAddSale.setOnClickListener(this);
         mImageAddInfo.setOnClickListener(this);
+        mRelativeSlider.setOnClickListener(this);
+        mImageChooseContent.setOnClickListener(this);
+        mImageAddContent.setOnClickListener(this);
     }
 
     private void initRecyclerSale() {
@@ -112,6 +139,12 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
 
         mAddInfoAdapter = new AddInfoAdapter(mParameters);
         mRecyclerInfo.setAdapter(mAddInfoAdapter);
+
+        mAddSliderAdapter = new AddSliderAdapter(mBitmaps);
+        mRecyclerSlider.setAdapter(mAddSliderAdapter);
+
+        mAddContentAdapter = new AddContentAdapter(mDetailContents);
+        mRecyclerDes.setAdapter(mAddContentAdapter);
     }
 
     @Override
@@ -126,24 +159,52 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
                 onBackPressed();
                 break;
             case R.id.relative_choose_image:
+                isImageMain = true;
+                mImageOther = mImageItem;
                 chooseImage();
                 break;
             case R.id.button_upload:
-                showProgress();
-                new UploadImage().execute();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideProgress();
-                    }
-                }, 2000);
+//                showProgress();
+//                new UploadImage().execute();
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        hideProgress();
+//                    }
+//                }, 2000);
+                Log.d("ABCD", "onClick: " + mDetailContents.size());
                 break;
             case R.id.add_sale:
                 addSale();
             case R.id.add_list_info:
                 addInfo();
                 break;
+            case R.id.relative_add_slider:
+                isImageMain = false;
+                isImageSlider = true;
+                chooseImage();
+                break;
+            case R.id.image_description:
+                isImageMain = false;
+                isImageSlider = false;
+                isImageContent = true;
+                chooseImage();
+                break;
+            case R.id.add_description:
+                addDetailContent();
+                break;
         }
+    }
+
+    private void addDetailContent() {
+        String imageShow = "https://res.cloudinary.com/hoanglongb/image/upload/v1544258437/" + mNameOfImage + ".jpg";
+        if (!mEditTextContent.getText().toString().isEmpty()) {
+            DetailContent detailContent = new DetailContent(mEditTextContent.getText().toString(), imageShow);
+            mDetailContents.add(detailContent);
+            mAddContentAdapter.notifyDataSetChanged();
+        }
+        mEditTextContent.setText("");
+        mImageChooseContent.setImageResource(R.drawable.ic_add_a_photo_black_24dp);
     }
 
     private void addInfo() {
@@ -241,8 +302,17 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
             mPath = data.getData();
             try {
                 mBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mPath);
-                mImageItem.setImageBitmap(mBitmap);
-                mImageChoose.setVisibility(View.GONE);
+                if (isImageMain) {
+                    mImageOther.setImageBitmap(mBitmap);
+                    mImageChoose.setVisibility(View.GONE);
+                } else if (isImageSlider) {
+                    new UploadImage().execute();
+                    mBitmaps.add(mBitmap);
+                    mAddSliderAdapter.notifyDataSetChanged();
+                } else if (isImageContent) {
+                    new UploadImage().execute();
+                    mImageChooseContent.setImageBitmap(mBitmap);
+                }
             } catch (IOException e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -250,10 +320,18 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
             mIsGallery = true;
         }
         if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK && data != null) {
-
             mBitmap = (Bitmap) data.getExtras().get("data");
-            mImageItem.setImageBitmap(mBitmap);
-            mImageChoose.setVisibility(View.GONE);
+            if (isImageMain) {
+                mImageOther.setImageBitmap(mBitmap);
+                mImageChoose.setVisibility(View.GONE);
+            } else if (isImageSlider) {
+                new UploadImage().execute();
+                mBitmaps.add(mBitmap);
+                mAddSliderAdapter.notifyDataSetChanged();
+            } else if (isImageContent) {
+                new UploadImage().execute();
+                mImageChooseContent.setImageBitmap(mBitmap);
+            }
             mIsGallery = false;
         }
     }
@@ -277,6 +355,10 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
         String time = calendar.get(Calendar.YEAR) + "" + calendar.get(Calendar.MONTH) + "" + calendar.get(Calendar.DATE)
                 + "" + currentTime.getHours() + "" + currentTime.getMinutes() + "" + currentTime.getSeconds();
         mNameOfImage = DOMAIN + time;
+        if (isImageSlider) {
+            String imageShow = "https://res.cloudinary.com/hoanglongb/image/upload/v1544258437/" + mNameOfImage + ".jpg";
+            mImageSlider.add(imageShow);
+        }
         cloudinary.url()
                 .transformation(new Transformation().width(300).crop("fill"))
                 .generate(mNameOfImage + ".jpg");

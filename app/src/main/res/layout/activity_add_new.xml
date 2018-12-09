@@ -99,18 +99,18 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:background="#e7e1e1"
             android:id="@+id/relative_choose_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_200"
             android:layout_marginStart="@dimen/dimen_10"
-            android:layout_marginEnd="@dimen/dimen_10">
+            android:layout_marginEnd="@dimen/dimen_10"
+            android:background="#e7e1e1">
 
             <ImageView
-                android:layout_centerInParent="true"
                 android:id="@+id/image_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:scaleType="centerCrop" />
 
             <ImageView
@@ -147,24 +147,39 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="@dimen/dimen_100"
-            android:layout_height="@dimen/dimen_100"
-            android:layout_marginStart="@dimen/dimen_10"
-            android:layout_marginEnd="@dimen/dimen_10">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/choose_image_slider"
+            <RelativeLayout
+                android:id="@+id/relative_add_slider"
+                android:layout_width="@dimen/dimen_100"
+                android:layout_height="@dimen/dimen_100"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:layout_marginEnd="@dimen/dimen_10">
+
+                <ImageView
+                    android:id="@+id/choose_image_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#e7e1e1"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/image_item_slider"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_add_a_photo_black_24dp" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_slider"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#e7e1e1"
-                android:scaleType="centerCrop" />
-
-            <ImageView
-                android:id="@+id/image_item_slider"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_add_a_photo_black_24dp" />
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/relative_add_slider" />
         </RelativeLayout>
 
         <include layout="@layout/item_underline" />
@@ -550,14 +565,14 @@
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:orientation="vertical"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             android:id="@+id/recycler_add_sale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_10"
             android:layout_marginTop="@dimen/dimen_5"
-            android:layout_marginEnd="@dimen/dimen_10" />
+            android:layout_marginEnd="@dimen/dimen_10"
+            android:orientation="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
         <include layout="@layout/item_underline" />
 
@@ -663,7 +678,7 @@
                 android:src="@drawable/ic_add_a_photo_black_24dp" />
         </RelativeLayout>
 
-        <include layout="@layout/item_underline"/>
+        <include layout="@layout/item_underline" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_description"
