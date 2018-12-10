@@ -243,7 +243,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cb_category_item"
+                    android:id="@+id/cb_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPrimary" />
@@ -264,7 +264,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cb_breakfast"
+                    android:id="@+id/cb_tablet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPrimary" />
@@ -294,7 +294,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cb_snack"
+                    android:id="@+id/cb_laptop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPrimary" />
@@ -315,7 +315,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cb_cake"
+                    android:id="@+id/cb_accession"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPrimary" />
@@ -339,7 +339,7 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/cb_drink"
+                android:id="@+id/cb_watch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorPrimary" />
@@ -500,7 +500,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/et_time_cook"
+            android:id="@+id/et_link_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_10"

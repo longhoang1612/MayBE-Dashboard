@@ -40,7 +40,7 @@ public class AddContentAdapter extends RecyclerView.Adapter<AddContentAdapter.Co
     @Override
     public void onBindViewHolder(@NonNull ContentViewHolder contentViewHolder, int i) {
         DetailContent detailContent = mContentList.get(i);
-        contentViewHolder.bindData(detailContent);
+        contentViewHolder.bindData(detailContent,i);
     }
 
     @Override
@@ -48,27 +48,44 @@ public class AddContentAdapter extends RecyclerView.Adapter<AddContentAdapter.Co
         return mContentList != null ? mContentList.size() : 0;
     }
 
-    class ContentViewHolder extends RecyclerView.ViewHolder {
+    class ContentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.text_content)
         TextView mTextContent;
         @BindView(R.id.image_content)
         ImageView mImageContent;
+        @BindView(R.id.ic_delete)
+        ImageView mImageDelete;
         private Context mContext;
+        private int mPosition;
 
         ContentViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             mContext = context;
             ButterKnife.bind(this, itemView);
+            mImageDelete.setOnClickListener(this);
         }
 
-        void bindData(DetailContent detailContent) {
+        void bindData(DetailContent detailContent,int position) {
             if (detailContent == null) {
                 return;
             }
+            mPosition = position;
             mTextContent.setText(detailContent.getTitle());
             if (detailContent.getImage() != null) {
                 Glide.with(mContext).load(detailContent.getImage()).into(mImageContent);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.ic_delete:
+                    mContentList.remove(mPosition);
+                    notifyItemRemoved(mPosition);
+                    notifyItemRangeChanged(mPosition, mContentList.size());
+                    notifyDataSetChanged();
+                    break;
             }
         }
     }

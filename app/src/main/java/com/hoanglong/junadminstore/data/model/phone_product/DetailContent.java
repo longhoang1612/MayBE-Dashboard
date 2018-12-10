@@ -76,6 +76,7 @@ public class DetailContent implements Parcelable {
         return "DetailContent{" +
                 "title='" + title + '\'' +
                 ", id='" + id + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 

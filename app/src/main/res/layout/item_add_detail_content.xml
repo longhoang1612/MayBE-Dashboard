@@ -4,6 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/ic_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_10"
+        android:src="@drawable/ic_cancel_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/relative_image" />
+
     <TextView
         android:id="@+id/text_content"
         android:layout_width="0dp"
@@ -11,16 +21,24 @@
         android:layout_margin="@dimen/dimen_5"
         android:fontFamily="@font/sanfranciscodisplay_regular"
         android:textColor="@color/color_blue_grey_900"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ic_delete"
+        app:layout_constraintStart_toEndOf="@+id/relative_image"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/image_content"
-        android:layout_width="@dimen/dimen_60"
-        android:layout_height="@dimen/dimen_60"
+    <RelativeLayout
+        android:id="@+id/relative_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_5"
+        android:background="@color/color_bg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_content"
+            android:layout_width="@dimen/dimen_50"
+            android:layout_height="@dimen/dimen_50" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

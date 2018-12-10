@@ -68,6 +68,26 @@ public class ItemPhoneProduct implements Parcelable {
     public ItemPhoneProduct() {
     }
 
+    public ItemPhoneProduct(String type, String typeCategory, String title, String price,
+                            String image, Integer rating, String numberRating, String titleH2,
+                            String titleContent, List<String> slider, List<DetailContent> detailContent,
+                            List<Parameter> parameter, List<String> listSale, String linkVideo) {
+        this.type = type;
+        this.typeCategory = typeCategory;
+        this.title = title;
+        this.price = price;
+        this.image = image;
+        this.rating = rating;
+        this.numberRating = numberRating;
+        this.titleH2 = titleH2;
+        this.titleContent = titleContent;
+        this.slider = slider;
+        this.detailContent = detailContent;
+        mParameter = parameter;
+        this.listSale = listSale;
+        this.linkVideo = linkVideo;
+    }
+
     protected ItemPhoneProduct(Parcel in) {
         id = in.readString();
         type = in.readString();
@@ -429,5 +449,27 @@ public class ItemPhoneProduct implements Parcelable {
         dest.writeTypedList(detailContent);
     }
 
-
+    @Override
+    public String toString() {
+        return "ItemPhoneProduct{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", typeCategory='" + typeCategory + '\'' +
+                ", title='" + title + '\'' +
+                ", price='" + price + '\'' +
+                ", deal='" + deal + '\'' +
+                ", image='" + image + '\'' +
+                ", rating=" + rating +
+                ", numberRating='" + numberRating + '\'' +
+                ", titleH2='" + titleH2 + '\'' +
+                ", titleContent='" + titleContent + '\'' +
+                ", v=" + v +
+                ", slider=" + slider +
+                ", detailContent=" + detailContent +
+                ", mParameter=" + mParameter +
+                ", listExtraProduct=" + listExtraProduct +
+                ", listSale=" + listSale +
+                ", linkVideo='" + linkVideo + '\'' +
+                '}';
+    }
 }

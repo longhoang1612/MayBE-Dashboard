@@ -2,10 +2,13 @@ package com.hoanglong.junadminstore.service;
 
 import com.hoanglong.junadminstore.data.model.category.PhoneCategory;
 import com.hoanglong.junadminstore.data.model.home.Home;
+import com.hoanglong.junadminstore.data.model.phone_product.ItemPhoneProduct;
 import com.hoanglong.junadminstore.data.model.phone_product.PhoneProduct;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface IApiService {
@@ -26,4 +29,7 @@ public interface IApiService {
 
     @GET("getCategory/{typeCategory}")
     Call<PhoneCategory> getTypeCategory(@Path("typeCategory") String typeCategory);
+
+    @POST("/createProduct")
+    Call<ItemPhoneProduct> uploadNewProduct(@Body ItemPhoneProduct itemPhoneProduct);
 }

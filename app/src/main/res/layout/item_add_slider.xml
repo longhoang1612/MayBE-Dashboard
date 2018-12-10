@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/dimen_5">
 
     <ImageView
@@ -9,5 +10,12 @@
         android:layout_width="@dimen/dimen_100"
         android:layout_height="@dimen/dimen_100"
         android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/ic_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/image_slider"
+        android:src="@drawable/ic_cancel_black_24dp"/>
 
 </android.support.constraint.ConstraintLayout>

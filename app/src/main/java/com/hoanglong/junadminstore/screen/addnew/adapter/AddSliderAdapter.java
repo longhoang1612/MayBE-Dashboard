@@ -37,7 +37,7 @@ public class AddSliderAdapter extends RecyclerView.Adapter<AddSliderAdapter.Slid
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder sliderViewHolder, int i) {
         Bitmap bitmap = mBitmaps.get(i);
-        sliderViewHolder.bindData(bitmap);
+        sliderViewHolder.bindData(bitmap, i);
     }
 
     @Override
@@ -45,21 +45,38 @@ public class AddSliderAdapter extends RecyclerView.Adapter<AddSliderAdapter.Slid
         return mBitmaps != null ? mBitmaps.size() : 0;
     }
 
-    public class SliderViewHolder extends RecyclerView.ViewHolder {
+    public class SliderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.image_slider)
         ImageView mImageSlider;
+        @BindView(R.id.ic_delete)
+        ImageView mImageDelete;
+        private int mPosition;
 
         public SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            mImageDelete.setOnClickListener(this);
         }
 
-        public void bindData(Bitmap bitmap) {
+        public void bindData(Bitmap bitmap, int position) {
             if (bitmap == null) {
                 return;
             }
+            mPosition = position;
             mImageSlider.setImageBitmap(bitmap);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ic_delete:
+                    mBitmaps.remove(mPosition);
+                    notifyItemRemoved(mPosition);
+                    notifyItemRangeChanged(mPosition, mBitmaps.size());
+                    notifyDataSetChanged();
+                    break;
+            }
         }
     }
 }

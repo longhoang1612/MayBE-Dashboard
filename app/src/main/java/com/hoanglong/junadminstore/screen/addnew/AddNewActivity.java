@@ -15,12 +15,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cloudinary.Cloudinary;
@@ -29,11 +31,13 @@ import com.cloudinary.utils.ObjectUtils;
 import com.hoanglong.junadminstore.R;
 import com.hoanglong.junadminstore.base.BaseActivity;
 import com.hoanglong.junadminstore.data.model.phone_product.DetailContent;
+import com.hoanglong.junadminstore.data.model.phone_product.ItemPhoneProduct;
 import com.hoanglong.junadminstore.data.model.phone_product.Parameter;
 import com.hoanglong.junadminstore.screen.addnew.adapter.AddContentAdapter;
 import com.hoanglong.junadminstore.screen.addnew.adapter.AddInfoAdapter;
 import com.hoanglong.junadminstore.screen.addnew.adapter.AddSaleAdapter;
 import com.hoanglong.junadminstore.screen.addnew.adapter.AddSliderAdapter;
+import com.hoanglong.junadminstore.service.BaseService;
 import com.hoanglong.junadminstore.utils.Constant;
 
 import java.io.ByteArrayOutputStream;
@@ -49,6 +53,9 @@ import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddNewActivity extends BaseActivity implements View.OnClickListener {
 
@@ -93,6 +100,27 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
     ImageView mImageAddContent;
     @BindView(R.id.recycler_description)
     RecyclerView mRecyclerDes;
+    @BindView(R.id.et_name)
+    EditText mEditTextNameProduct;
+    @BindView(R.id.tv_categories)
+    TextView mTextCategories;
+    @BindView(R.id.cb_phone)
+    CheckBox mCheckPhone;
+    @BindView(R.id.cb_tablet)
+    CheckBox mCheckTablet;
+    @BindView(R.id.cb_laptop)
+    CheckBox mCheckBoxLaptop;
+    @BindView(R.id.cb_accession)
+    CheckBox mCheckBoxAccession;
+    @BindView(R.id.cb_watch)
+    CheckBox mCheckBoxWatch;
+    @BindView(R.id.et_price_item)
+    EditText mEditTextPrice;
+    @BindView(R.id.et_link_video)
+    EditText mEditTextLinkVideo;
+    @BindView(R.id.et_title_des)
+    EditText mEditTextHeaderTitle;
+
 
     private Uri mPath;
     boolean mIsGallery = true;
@@ -123,6 +151,7 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
     protected void initComponent() {
         ButterKnife.bind(this);
         initRecyclerSale();
+        checkBox();
         mImageBack.setOnClickListener(this);
         mRelativeChooseImage.setOnClickListener(this);
         mButtonUpload.setOnClickListener(this);
@@ -164,15 +193,8 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
                 chooseImage();
                 break;
             case R.id.button_upload:
-//                showProgress();
-//                new UploadImage().execute();
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        hideProgress();
-//                    }
-//                }, 2000);
-                Log.d("ABCD", "onClick: " + mDetailContents.size());
+                showProgress();
+                inValid();
                 break;
             case R.id.add_sale:
                 addSale();
@@ -193,6 +215,58 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
             case R.id.add_description:
                 addDetailContent();
                 break;
+        }
+    }
+
+    private void upLoadNewProduct() {
+        String type = "null";
+        String typeCategory = mTextCategories.getText().toString();
+        String title = mEditTextNameProduct.getText().toString();
+        String price = mEditTextPrice.getText().toString();
+        String image = "https://res.cloudinary.com/hoanglongb/image/upload/v1544258437/" + mNameOfImage + ".jpg";
+        Integer rating = 0;
+        String numberRating = "0 đánh giá";
+        String titleH2 = "";
+        String titleContent = mEditTextHeaderTitle.getText().toString();
+        List<String> slider = mImageSlider;
+        List<DetailContent> detailContent = mDetailContents;
+        List<Parameter> parameter = mParameters;
+        List<String> listSale = mSales;
+        String linkVideo = mEditTextLinkVideo.getText().toString();
+
+
+        ItemPhoneProduct newProduct = new ItemPhoneProduct(
+                type, typeCategory, title, price, image, rating, numberRating,
+                titleH2, titleContent, slider, detailContent, parameter, listSale, linkVideo
+        );
+        
+        Call<ItemPhoneProduct> upload = BaseService.getService().uploadNewProduct(newProduct);
+        upload.enqueue(new Callback<ItemPhoneProduct>() {
+            @Override
+            public void onResponse(@NonNull Call<ItemPhoneProduct> call, @NonNull Response<ItemPhoneProduct> response) {
+                Toast.makeText(AddNewActivity.this, "Upload Success", Toast.LENGTH_SHORT).show();
+                hideProgress();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ItemPhoneProduct> call, @NonNull Throwable t) {
+                Toast.makeText(AddNewActivity.this, "Upload Fail", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void inValid() {
+        if (mEditTextNameProduct.getText().toString().isEmpty()
+                || mBitmap == null
+                || mImageSlider.size() == 0
+                || mParameters.size() == 0
+                || mEditTextPrice.getText().toString().isEmpty()
+                || mSales.size() == 0
+                || mDetailContents.size() == 0) {
+            Toast.makeText(this, "Bạn không được để trống các trường có dấu (*) ", Toast.LENGTH_SHORT).show();
+        } else {
+            upLoadNewProduct();
         }
     }
 
@@ -297,12 +371,13 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null) {
+            showProgress();
             mPath = data.getData();
             try {
                 mBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mPath);
                 if (isImageMain) {
+                    new UploadImage().execute();
                     mImageOther.setImageBitmap(mBitmap);
                     mImageChoose.setVisibility(View.GONE);
                 } else if (isImageSlider) {
@@ -320,6 +395,7 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
             mIsGallery = true;
         }
         if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK && data != null) {
+            showProgress();
             mBitmap = (Bitmap) data.getExtras().get("data");
             if (isImageMain) {
                 mImageOther.setImageBitmap(mBitmap);
@@ -337,12 +413,6 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void uploadImage() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), "Upload Image", Toast.LENGTH_SHORT).show();
-            }
-        });
         mSuccess = false;
         Map config = new HashMap();
         config.put("cloud_name", Constant.Cloudinary.CLOUD_NAME);
@@ -374,8 +444,13 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
 
             }
             mSuccess = true;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    hideProgress();
+                }
+            });
         } catch (IOException e) {
-            Log.d("myBase64Image", "uploadImage: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -411,5 +486,54 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
             return;
         mProgressDialog.dismiss();
         mProgressDialog = null;
+    }
+
+    public void checkBox() {
+
+        mCheckPhone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isCheck) {
+                if (isCheck) {
+                    mTextCategories.setText("Điện thoại ");
+                }
+            }
+        });
+
+        mCheckTablet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isCheck) {
+                if (isCheck) {
+                    mTextCategories.setText("Tablet");
+                }
+            }
+        });
+
+        mCheckBoxLaptop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isCheck) {
+                if (isCheck) {
+                    mTextCategories.setText("Laptop");
+                }
+            }
+        });
+
+        mCheckBoxAccession.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isCheck) {
+                if (isCheck) {
+                    mTextCategories.setText("Phụ kiện");
+                }
+            }
+        });
+
+        mCheckBoxWatch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isCheck) {
+                if (isCheck) {
+                    mTextCategories.setText("Đồng hồ");
+                }
+            }
+        });
+
     }
 }
