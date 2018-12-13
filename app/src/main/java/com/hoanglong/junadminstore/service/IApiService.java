@@ -2,6 +2,7 @@ package com.hoanglong.junadminstore.service;
 
 import com.hoanglong.junadminstore.data.model.category.PhoneCategory;
 import com.hoanglong.junadminstore.data.model.home.Home;
+import com.hoanglong.junadminstore.data.model.order.OrderUpload;
 import com.hoanglong.junadminstore.data.model.phone_product.ItemPhoneProduct;
 import com.hoanglong.junadminstore.data.model.phone_product.PhoneProduct;
 
@@ -32,4 +33,7 @@ public interface IApiService {
 
     @POST("/createProduct")
     Call<ItemPhoneProduct> uploadNewProduct(@Body ItemPhoneProduct itemPhoneProduct);
+
+    @GET("/getOrder")
+    Call<OrderUpload> getAllOrder();
 }

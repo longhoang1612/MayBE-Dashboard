@@ -37,4 +37,7 @@
     <dimen name="dimen_0_5dp">0.5dp</dimen>
     <dimen name="dimen_18dp">18dp</dimen>
     <dimen name="dimen_150">150dp</dimen>
+    <dimen name="dimen_text_14">14sp</dimen>
+    <dimen name="dimen_text_16">16sp</dimen>
+    <dimen name="dimen_80">80dp</dimen>
 </resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginEnd="@dimen/dimen_10"
+        android:id="@+id/ic_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filter_tilt_shift_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_title_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:ellipsize="end"
+        android:fontFamily="@font/sanfranciscodisplay_regular"
+        android:maxLines="2"
+        android:text="Chuột có dây gaming logitech g102 - hàng chính hãng"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/dimen_text_16"
+        app:layout_constraintEnd_toStartOf="@+id/ic_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_code_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_5"
+        android:fontFamily="@font/sanfranciscodisplay_regular"
+        android:text="Mã đơn hàng: 402521234"
+        android:textSize="@dimen/dimen_text_14"
+        app:layout_constraintEnd_toStartOf="@+id/ic_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_title_order" />
+
+    <TextView
+        android:id="@+id/text_date_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_5"
+        android:fontFamily="@font/sanfranciscodisplay_regular"
+        android:text="Ngày đặt hàng: 11:35, 26/10/2017"
+        android:textSize="@dimen/dimen_text_14"
+        app:layout_constraintEnd_toStartOf="@+id/ic_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_code_order" />
+
+    <TextView
+        android:id="@+id/text_status_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:fontFamily="@font/sanfranciscodisplay_regular"
+        android:text="Trạng thái: Giao hàng thành công"
+        android:textSize="@dimen/dimen_text_14"
+        app:layout_constraintEnd_toStartOf="@+id/ic_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_date_order" />
+
+    <View
+        android:background="@color/color_underline"
+        android:layout_marginTop="@dimen/dimen_20"
+        app:layout_constraintTop_toBottomOf="@+id/text_status_order"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"/>
+
+</android.support.constraint.ConstraintLayout>

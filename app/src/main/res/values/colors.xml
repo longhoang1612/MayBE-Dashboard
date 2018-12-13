@@ -15,4 +15,6 @@
     <color name="color_yellow_600">#fdd835</color>
     <color name="color_bg">#eeeeee</color>
     <color name="color_brown_100">#d2bfbf</color>
+    <color name="color_underline">#eeeeee</color>
+    <color name="color_black">#000000</color>
 </resources>
