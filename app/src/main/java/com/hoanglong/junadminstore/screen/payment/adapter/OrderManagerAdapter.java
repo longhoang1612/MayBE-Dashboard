@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import com.hoanglong.junadminstore.R;
 import com.hoanglong.junadminstore.data.model.order.Order;
+import com.hoanglong.junadminstore.service.EventUpdate;
 import com.hoanglong.junadminstore.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -37,6 +40,7 @@ public class OrderManagerAdapter extends RecyclerView.Adapter<OrderManagerAdapte
 
     public interface OnClickOrderListener {
         void onClickOrder(Order order);
+        void onUpdate();
     }
 
     @NonNull
@@ -98,6 +102,7 @@ public class OrderManagerAdapter extends RecyclerView.Adapter<OrderManagerAdapte
             mTextCodeOrder.setText(String.format("Người đặt hàng: %s", order.getNameUser()));
             mTextDateOrder.setText(String.format("Ngày đặt hàng: %s", order.getDateOrder()));
             mTextStatusOrder.setText(String.format("Trạng thái: %s", order.getStatusOrder()));
+
             switch (order.getStatusOrder()) {
                 case ORDER_WAITING_CONFIRM:
                     mImageStatus.setImageResource(R.drawable.ic_filter_tilt_shift_black_24dp);
@@ -120,11 +125,12 @@ public class OrderManagerAdapter extends RecyclerView.Adapter<OrderManagerAdapte
                     if (mOrder.getStatusOrder().equals(ORDER_WAITING_CONFIRM)) {
                         Utils.uploadStatus(mOrder.getIdOrder(), ORDER_CONFIRMED);
                         mImageStatus.setImageResource(R.drawable.ic_cofirm);
-                        notifyDataSetChanged();
+                        mOnClickOrderListener.onUpdate();
                     } else if (mOrder.getStatusOrder().equals(ORDER_CONFIRMED)) {
                         Utils.uploadStatus(mOrder.getIdOrder(), ORDER_DELIVERY);
                         mImageStatus.setImageResource(R.drawable.ic_delivery);
-                        notifyDataSetChanged();
+                        mOnClickOrderListener.onUpdate();
+                        EventBus.getDefault().postSticky(new EventUpdate("Update"));
                     }
                     break;
                 case R.id.constraint_order:

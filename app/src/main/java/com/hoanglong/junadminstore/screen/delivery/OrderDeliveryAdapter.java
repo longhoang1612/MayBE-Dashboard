@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import com.hoanglong.junadminstore.R;
 import com.hoanglong.junadminstore.data.model.order.Order;
+import com.hoanglong.junadminstore.service.EventUpdate;
 import com.hoanglong.junadminstore.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -34,6 +37,7 @@ public class OrderDeliveryAdapter extends RecyclerView.Adapter<OrderDeliveryAdap
 
     public interface OnClickOrderListener {
         void onClickOrder(Order order);
+
         void update();
     }
 
@@ -116,6 +120,7 @@ public class OrderDeliveryAdapter extends RecyclerView.Adapter<OrderDeliveryAdap
                     mTextDone.setVisibility(View.GONE);
                     Utils.uploadStatus(mOrder.getIdOrder(), ORDER_DONE);
                     mOnClickOrderListener.update();
+                    EventBus.getDefault().postSticky(new EventUpdate("Update"));
                     break;
                 case R.id.constraint_order:
                     mOnClickOrderListener.onClickOrder(mOrder);

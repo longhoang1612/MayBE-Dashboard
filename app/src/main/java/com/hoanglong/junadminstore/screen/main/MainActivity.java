@@ -7,11 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.hoanglong.junadminstore.R;
+import com.hoanglong.junadminstore.screen.dashboard.DashBoardFragment;
 import com.hoanglong.junadminstore.screen.delivery.DeliveryFragment;
 import com.hoanglong.junadminstore.screen.payment.PaymentFragment;
-import com.hoanglong.junadminstore.screen.dashboard.DashBoardFragment;
 import com.hoanglong.junadminstore.utils.FragmentTransactionUtils;
-import com.hoanglong.junadminstore.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,10 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
-                    fragment = getSupportFragmentManager().findFragmentByTag(DashBoardFragment.TAG);
+                    Fragment fragment = getSupportFragmentManager().findFragmentByTag(DashBoardFragment.TAG);
                     if (fragment == null) {
                         fragment = new DashBoardFragment();
                     }
@@ -76,5 +75,4 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         openDefaultFragment();
     }
-
 }

@@ -1,11 +1,14 @@
 package com.hoanglong.junadminstore.screen.delivery;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.hoanglong.junadminstore.DetailOrderFragment;
 import com.hoanglong.junadminstore.R;
@@ -14,7 +17,12 @@ import com.hoanglong.junadminstore.data.model.TypeConfirmOrder;
 import com.hoanglong.junadminstore.data.model.order.Order;
 import com.hoanglong.junadminstore.data.model.order.OrderUpload;
 import com.hoanglong.junadminstore.service.BaseService;
+import com.hoanglong.junadminstore.service.EventUpdate;
 import com.hoanglong.junadminstore.utils.FragmentTransactionUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +41,8 @@ public class DeliveryFragment extends BaseFragment implements OrderDeliveryAdapt
     ProgressBar mProgressDelivery;
     @BindView(R.id.relative_empty)
     RelativeLayout mRelativeEmpty;
+    @BindView(R.id.swipe_delivery)
+    SwipeRefreshLayout mSwipeRefresh;
 
     @Override
     protected int getLayoutResources() {
@@ -44,6 +54,18 @@ public class DeliveryFragment extends BaseFragment implements OrderDeliveryAdapt
         ButterKnife.bind(this, view);
         mProgressDelivery.setVisibility(View.VISIBLE);
         mRecyclerOrder.setVisibility(View.GONE);
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeRefresh.setRefreshing(false);
+                        getOrderDelivery();
+                    }
+                },500);
+            }
+        });
     }
 
     @Override
@@ -98,6 +120,24 @@ public class DeliveryFragment extends BaseFragment implements OrderDeliveryAdapt
 
     @Override
     public void update() {
+        getOrderDelivery();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventUpdate update) {
+        Toast.makeText(getContext(), "Update", Toast.LENGTH_SHORT).show();
         getOrderDelivery();
     }
 }
