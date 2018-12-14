@@ -85,7 +85,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private RelativeLayout mRelativeSale;
         private ItemPhoneProduct mItemPhoneProduct;
 
-        public ItemPhoneViewHolder(@NonNull View itemView, Context context, OnClickProductListener listener) {
+        ItemPhoneViewHolder(@NonNull View itemView, Context context, OnClickProductListener listener) {
             super(itemView);
             mContext = context;
             mListener = listener;
@@ -106,7 +106,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             mItemPhoneProduct = itemPhoneProduct;
             Glide.with(mContext).load(itemPhoneProduct.getImage()).into(mImageView);
-            if (itemPhoneProduct.getDeal().equals("")) {
+            if (itemPhoneProduct.getDeal() == null || itemPhoneProduct.getDeal().equals("")) {
                 mRelativeSale.setVisibility(View.GONE);
             } else {
                 mRelativeSale.setVisibility(View.VISIBLE);
