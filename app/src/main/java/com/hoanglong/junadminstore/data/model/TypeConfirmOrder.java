@@ -4,9 +4,10 @@ import android.support.annotation.StringDef;
 
 import static com.hoanglong.junadminstore.data.model.TypeConfirmOrder.ORDER_CONFIRMED;
 import static com.hoanglong.junadminstore.data.model.TypeConfirmOrder.ORDER_DELIVERY;
+import static com.hoanglong.junadminstore.data.model.TypeConfirmOrder.ORDER_DONE;
 import static com.hoanglong.junadminstore.data.model.TypeConfirmOrder.ORDER_WAITING_CONFIRM;
 
-@StringDef({ORDER_DELIVERY, ORDER_WAITING_CONFIRM, ORDER_CONFIRMED})
+@StringDef({ORDER_DELIVERY, ORDER_WAITING_CONFIRM, ORDER_CONFIRMED,ORDER_DONE})
 public @interface TypeConfirmOrder {
     String ORDER_DELIVERY = "Đang giao hàng";
     String ORDER_WAITING_CONFIRM = "Đang xác nhận";
