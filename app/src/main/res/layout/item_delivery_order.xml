@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraint_order"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white">
+
+    <RelativeLayout
+        android:background="@drawable/custom_button1"
+        android:id="@+id/ic_status"
+        android:layout_marginEnd="@dimen/dimen_10"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_done"
+            android:textColor="@color/color_white"
+            android:fontFamily="@font/sanfranciscodisplay_semibold"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_text_14"
+            android:text="Done"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/image_status"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_done_all_black_24dp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_title_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:ellipsize="end"
+        android:fontFamily="@font/sanfranciscodisplay_regular"
+        android:maxLines="2"
+        android:text="Chuột có dây gaming logitech g102 - hàng chính hãng"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/dimen_text_16"
+        app:layout_constraintEnd_toStartOf="@+id/ic_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_code_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_5"
+        android:fontFamily="@font/sanfranciscodisplay_regular"
+        android:text="Mã đơn hàng: 402521234"
+        android:textSize="@dimen/dimen_text_14"
+        app:layout_constraintEnd_toStartOf="@+id/ic_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_title_order" />
+
+    <TextView
+        android:id="@+id/text_date_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_5"
+        android:fontFamily="@font/sanfranciscodisplay_regular"
+        android:text="Ngày đặt hàng: 11:35, 26/10/2017"
+        android:textSize="@dimen/dimen_text_14"
+        app:layout_constraintEnd_toStartOf="@+id/ic_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_code_order" />
+
+    <TextView
+        android:id="@+id/text_status_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:fontFamily="@font/sanfranciscodisplay_regular"
+        android:text="Trạng thái: Giao hàng thành công"
+        android:textSize="@dimen/dimen_text_14"
+        app:layout_constraintEnd_toStartOf="@+id/ic_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_date_order" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:background="@color/color_underline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_status_order" />
+
+</android.support.constraint.ConstraintLayout>

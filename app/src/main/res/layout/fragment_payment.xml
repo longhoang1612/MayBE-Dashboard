@@ -37,6 +37,43 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/relative_empty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_detail">
+
+        <ImageView
+            android:id="@+id/ic_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_empty_order" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ic_empty"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/sanfranciscodisplay_regular"
+            android:text="Cửa hàng chưa có đơn hàng nào"
+            android:textColor="#e67e22"
+            android:textSize="@dimen/dimen_18sp" />
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_detail" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_order"
         android:layout_width="match_parent"

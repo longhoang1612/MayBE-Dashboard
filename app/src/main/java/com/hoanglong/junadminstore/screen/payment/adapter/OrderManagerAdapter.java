@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 
 import static com.hoanglong.junadminstore.data.model.TypeConfirmOrder.ORDER_CONFIRMED;
 import static com.hoanglong.junadminstore.data.model.TypeConfirmOrder.ORDER_DELIVERY;
+import static com.hoanglong.junadminstore.data.model.TypeConfirmOrder.ORDER_DONE;
 import static com.hoanglong.junadminstore.data.model.TypeConfirmOrder.ORDER_WAITING_CONFIRM;
 
 public class OrderManagerAdapter extends RecyclerView.Adapter<OrderManagerAdapter.OrderViewHolder> {
@@ -107,6 +108,8 @@ public class OrderManagerAdapter extends RecyclerView.Adapter<OrderManagerAdapte
                 case ORDER_DELIVERY:
                     mImageStatus.setImageResource(R.drawable.ic_delivery);
                     break;
+                case ORDER_DONE:
+                    mImageStatus.setImageResource(R.drawable.ic_done);
             }
         }
 

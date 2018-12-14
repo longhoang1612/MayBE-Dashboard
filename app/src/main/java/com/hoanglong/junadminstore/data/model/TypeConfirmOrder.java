@@ -11,4 +11,5 @@ public @interface TypeConfirmOrder {
     String ORDER_DELIVERY = "Đang giao hàng";
     String ORDER_WAITING_CONFIRM = "Đang xác nhận";
     String ORDER_CONFIRMED = "Đã xác nhận đơn hàng";
+    String ORDER_DONE = "Giao hàng thành công";
 }

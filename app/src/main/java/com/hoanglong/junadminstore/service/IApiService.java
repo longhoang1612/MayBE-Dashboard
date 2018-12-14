@@ -42,4 +42,7 @@ public interface IApiService {
 
     @PUT("/updateOrder/{idOrder}")
     Call<Order> updateStatusOrder(@Path("idOrder") String idOrder, @Body StatusUpload statusUpload);
+
+    @GET("/getOrderByStatus/{statusOrder}")
+    Call<OrderUpload> getDelivery(@Path("statusOrder") String statusOrder);
 }
