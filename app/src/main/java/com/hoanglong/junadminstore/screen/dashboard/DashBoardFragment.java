@@ -3,12 +3,13 @@ package com.hoanglong.junadminstore.screen.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.Group;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.hoanglong.junadminstore.R;
@@ -23,7 +24,9 @@ import com.hoanglong.junadminstore.data.source.remote.HomeDataSource;
 import com.hoanglong.junadminstore.screen.addnew.AddNewActivity;
 import com.hoanglong.junadminstore.screen.dashboard.adapter.CategoriesAdapter;
 import com.hoanglong.junadminstore.screen.dashboard.adapter.PhoneAdapter;
+import com.hoanglong.junadminstore.screen.phone.detail_product.DetailProductActivity;
 import com.hoanglong.junadminstore.screen.phone.phone_category.PhoneCategoryFragment;
+import com.hoanglong.junadminstore.screen.search.SearchActivity;
 import com.hoanglong.junadminstore.utils.EndlessRecyclerViewScrollListener;
 
 import java.util.ArrayList;
@@ -44,14 +47,15 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
     RecyclerView mRecyclerCategory;
     @BindView(R.id.recycler_all_item)
     RecyclerView mRecyclerAllItem;
-    @BindView(R.id.linear_dashboard)
-    LinearLayout mLinearDashboard;
+    @BindView(R.id.group_dashboard)
+    Group mLinearDashboard;
     @BindView(R.id.progress_dashboard)
     ProgressBar mProgressDashboard;
-
+    @BindView(R.id.relative_search)
+    RelativeLayout mRelativeSearch;
     private static final int LIMIT = 4;
     private int mPage = LIMIT;
-    private boolean mIsLoading;
+    private boolean mIsLoading = false;
     private List<ItemPhoneProduct> mItemPhoneProducts;
     private PhoneAdapter mPhoneAdapter;
     private DashBoardPresenter mDashBoardPresenter;
@@ -65,6 +69,7 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
     protected void initComponent(View view) {
         ButterKnife.bind(this, view);
         mFabAddNewItem.setOnClickListener(this);
+        mRelativeSearch.setOnClickListener(this);
     }
 
     @Override
@@ -96,6 +101,7 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
                 }
             }
         });
+        mRecyclerAllItem.setHasFixedSize(true);
         mRecyclerAllItem.setLayoutManager(gridLayoutManager);
         mRecyclerAllItem.setAdapter(mPhoneAdapter);
 
@@ -118,6 +124,10 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
             case R.id.fab_add_new:
                 Intent intent = new Intent(getActivity(), AddNewActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.relative_search:
+                Intent intent1 = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent1);
                 break;
         }
     }
@@ -172,21 +182,15 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onClickItem(Category category) {
-//        if (getFragmentManager() != null) {
-//            FragmentTransactionUtils.addFragment(
-//                    getFragmentManager(),
-//                    PhoneCategoryFragment.newInstance(category),
-//                    R.id.frame_home,
-//                    PhoneCategoryFragment.TAG,
-//                    true, -1, -1);
-//        }
-        Intent intent = new Intent(getActivity(),PhoneCategoryFragment.class);
-        intent.putExtra(PhoneCategoryFragment.BUNDLE_CATEGORY,category);
+        Intent intent = new Intent(getActivity(), PhoneCategoryFragment.class);
+        intent.putExtra(PhoneCategoryFragment.BUNDLE_CATEGORY, category);
         startActivity(intent);
     }
 
     @Override
     public void onClickItemProduct(ItemPhoneProduct itemPhoneProduct) {
-
+        Intent intent = new Intent(getActivity(), DetailProductActivity.class);
+        intent.putExtra("BUNDLE_ITEM_PRODUCT", itemPhoneProduct.getTitle());
+        startActivity(intent);
     }
 }

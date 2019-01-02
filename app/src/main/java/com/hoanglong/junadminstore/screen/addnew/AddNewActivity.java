@@ -43,6 +43,7 @@ import com.hoanglong.junadminstore.utils.Constant;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -222,7 +223,10 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
         String type = "null";
         String typeCategory = mTextCategories.getText().toString();
         String title = mEditTextNameProduct.getText().toString();
-        String price = mEditTextPrice.getText().toString();
+
+        NumberFormat fmt = NumberFormat.getCurrencyInstance();
+        String price = fmt.format(Long.valueOf(mEditTextPrice.getText().toString()));
+
         String image = "https://res.cloudinary.com/hoanglongb/image/upload/v1544258437/" + mNameOfImage + ".jpg";
         Integer rating = 0;
         String numberRating = "0 đánh giá";
@@ -239,7 +243,7 @@ public class AddNewActivity extends BaseActivity implements View.OnClickListener
                 type, typeCategory, title, price, image, rating, numberRating,
                 titleH2, titleContent, slider, detailContent, parameter, listSale, linkVideo
         );
-        
+
         Call<ItemPhoneProduct> upload = BaseService.getService().uploadNewProduct(newProduct);
         upload.enqueue(new Callback<ItemPhoneProduct>() {
             @Override

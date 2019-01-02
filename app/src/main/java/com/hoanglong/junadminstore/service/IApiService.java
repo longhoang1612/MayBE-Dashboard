@@ -1,12 +1,14 @@
 package com.hoanglong.junadminstore.service;
 
 import com.hoanglong.junadminstore.data.model.category.PhoneCategory;
+import com.hoanglong.junadminstore.data.model.comment.CommentUpload;
 import com.hoanglong.junadminstore.data.model.home.Home;
 import com.hoanglong.junadminstore.data.model.order.Order;
 import com.hoanglong.junadminstore.data.model.order.OrderUpload;
 import com.hoanglong.junadminstore.data.model.order.StatusUpload;
 import com.hoanglong.junadminstore.data.model.phone_product.ItemPhoneProduct;
 import com.hoanglong.junadminstore.data.model.phone_product.PhoneProduct;
+import com.hoanglong.junadminstore.data.model.search.KeySearch;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -45,4 +47,10 @@ public interface IApiService {
 
     @GET("/getOrderByStatus/{statusOrder}")
     Call<OrderUpload> getDelivery(@Path("statusOrder") String statusOrder);
+
+    @POST("/searchItems")
+    Call<PhoneProduct> getSearch(@Body KeySearch keySearch);
+
+    @GET("/getComment/{idProduct}")
+    Call<CommentUpload> getComment(@Path("idProduct") String idProduct);
 }

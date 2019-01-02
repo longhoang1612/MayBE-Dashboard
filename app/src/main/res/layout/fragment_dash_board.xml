@@ -1,94 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_white"
-    android:clickable="true"
-    android:focusable="true"
-    tools:context=".screen.dashboard.DashBoardFragment">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/relative_search"
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_55"
-        android:background="#03a9f5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/dimen_7"
             android:background="@color/color_white"
-            app:cardCornerRadius="@dimen/dimen_5">
+            android:clickable="true"
+            android:focusable="true"
+            tools:context=".screen.dashboard.DashBoardFragment">
 
             <RelativeLayout
+                android:id="@+id/relative_search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="@dimen/dimen_55"
+                android:background="#03a9f5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/ic_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dimen_10"
-                    android:src="@drawable/ic_search_black_24dp" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="@dimen/dimen_7"
+                    android:background="@color/color_white"
+                    app:cardCornerRadius="@dimen/dimen_5">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@+id/ic_qr_code"
-                    android:layout_toEndOf="@+id/ic_search"
-                    android:background="@android:color/transparent"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/sanfranciscodisplay_regular"
-                    android:maxLines="1"
-                    android:padding="@dimen/dimen_5"
-                    android:text="@string/title_search"
-                    android:textColor="#444444" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/ic_qr_code"
-                    android:layout_width="@dimen/dimen_24"
-                    android:layout_height="@dimen/dimen_24"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/dimen_10"
-                    android:src="@drawable/qr_code" />
+                        <ImageView
+                            android:id="@+id/ic_search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            android:src="@drawable/ic_search_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toStartOf="@+id/ic_qr_code"
+                            android:layout_toEndOf="@+id/ic_search"
+                            android:background="@android:color/transparent"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/sanfranciscodisplay_regular"
+                            android:maxLines="1"
+                            android:padding="@dimen/dimen_5"
+                            android:text="@string/title_search"
+                            android:textColor="#444444" />
+
+                        <ImageView
+                            android:id="@+id/ic_qr_code"
+                            android:layout_width="@dimen/dimen_24"
+                            android:layout_height="@dimen/dimen_24"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/dimen_10"
+                            android:src="@drawable/ic_keyboard_voice_black_24dp" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
             </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
-
-    </RelativeLayout>
-
-    <ProgressBar
-        android:id="@+id/progress_dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relative_search"/>
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/dimen_60"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relative_search">
-
-        <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/linear_dashboard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            <ProgressBar
+                android:id="@+id/progress_dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relative_search" />
 
             <TextView
                 android:id="@+id/text_category"
@@ -98,14 +90,14 @@
                 android:fontFamily="@font/sanfranciscodisplay_medium"
                 android:text="Danh mục sản phẩm"
                 android:textSize="@dimen/dimen_16sp"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relative_search" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10"
-                android:nestedScrollingEnabled="false"
                 app:layoutManager="android.support.v7.widget.GridLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/text_category"
                 app:spanCount="3" />
@@ -123,29 +115,36 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_all_item"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_10"
-                android:layout_marginBottom="8dp"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:layout_marginEnd="@dimen/dimen_10"
+                android:layout_marginBottom="@dimen/dimen_60"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_all_item"
-                app:spanCount="2"
-                tools:layout_editor_absoluteX="10dp" />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_all_item" />
+
+            <android.support.constraint.Group
+                android:id="@+id/group_dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="text_category,recycler_category,text_all_item,recycler_all_item" />
+
+        </android.support.constraint.ConstraintLayout>
+
 
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_new"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dimen_16"
         android:layout_marginBottom="@dimen/dimen_60"
-        android:src="@drawable/ic_add_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:src="@drawable/ic_add_black_24dp" />
 
-</android.support.constraint.ConstraintLayout>
-
+</RelativeLayout>

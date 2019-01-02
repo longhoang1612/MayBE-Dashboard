@@ -610,7 +610,7 @@
             android:layout_marginEnd="@dimen/dimen_10"
             android:backgroundTint="@color/colorPrimary"
             android:hint="@string/hint_title_des"
-            android:inputType="time"
+            android:inputType="textAutoComplete"
             android:textColorHint="@color/color_brown_100"
             android:textSize="@dimen/dimen_14sp" />
 
