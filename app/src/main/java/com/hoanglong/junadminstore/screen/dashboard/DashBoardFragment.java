@@ -1,10 +1,12 @@
 package com.hoanglong.junadminstore.screen.dashboard;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.Group;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.hoanglong.junadminstore.screen.phone.detail_product.DetailProductActi
 import com.hoanglong.junadminstore.screen.phone.phone_category.PhoneCategoryFragment;
 import com.hoanglong.junadminstore.screen.search.SearchActivity;
 import com.hoanglong.junadminstore.utils.EndlessRecyclerViewScrollListener;
+import com.hoanglong.junadminstore.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,5 +195,27 @@ public class DashBoardFragment extends BaseFragment implements View.OnClickListe
         Intent intent = new Intent(getActivity(), DetailProductActivity.class);
         intent.putExtra("BUNDLE_ITEM_PRODUCT", itemPhoneProduct.getTitle());
         startActivity(intent);
+    }
+
+    @Override
+    public void deleteProduct(final ItemPhoneProduct itemPhoneProduct) {
+        if (getContext() == null) return;
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Xóa sản phẩm")
+                .setMessage("Bạn chắc chắn muốn xóa sản phẩm này?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Utils.deleteProduct(getContext(), itemPhoneProduct);
+                        mPhoneAdapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

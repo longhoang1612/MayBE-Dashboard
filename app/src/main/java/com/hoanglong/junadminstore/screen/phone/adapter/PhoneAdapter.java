@@ -51,6 +51,8 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ItemPhoneVie
 
     public interface OnClickProductListener {
         void onClickItemProduct(ItemPhoneProduct itemPhoneProduct);
+
+        void deleteProduct(ItemPhoneProduct itemPhoneProduct);
     }
 
     public static class ItemPhoneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -66,6 +68,8 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ItemPhoneVie
         private RatingBar mRatingBar;
         private RelativeLayout mRelativeSale;
         private ItemPhoneProduct mItemPhoneProduct;
+        private ImageView mImageDelete;
+        private RelativeLayout mRelativeProduct;
 
         public ItemPhoneViewHolder(@NonNull View itemView, Context context, OnClickProductListener listener) {
             super(itemView);
@@ -79,7 +83,11 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ItemPhoneVie
             mRelativeSale = itemView.findViewById(R.id.relative_sale);
             mTextNumberRatting = itemView.findViewById(R.id.text_number_rating);
             mRatingBar = itemView.findViewById(R.id.rating_bar);
+            mImageDelete = itemView.findViewById(R.id.ic_delete_product);
+            mRelativeProduct = itemView.findViewById(R.id.relative_product);
             itemView.setOnClickListener(this);
+            mImageDelete.setOnClickListener(this);
+            mRelativeProduct.setOnClickListener(this);
         }
 
         public void bindData(ItemPhoneProduct itemPhoneProduct) {
@@ -106,7 +114,13 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ItemPhoneVie
 
         @Override
         public void onClick(View view) {
-            mListener.onClickItemProduct(mItemPhoneProduct);
+            switch (view.getId()) {
+                case R.id.relative_product:
+                    mListener.onClickItemProduct(mItemPhoneProduct);
+                    break;
+                case R.id.ic_delete_product:
+                    mListener.deleteProduct(mItemPhoneProduct);
+            }
         }
     }
 }

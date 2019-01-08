@@ -69,6 +69,8 @@ public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public interface OnClickProductListener {
         void onClickItemProduct(ItemPhoneProduct itemPhoneProduct);
+
+        void deleteProduct(ItemPhoneProduct itemPhoneProduct);
     }
 
     public static class ItemPhoneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -79,11 +81,12 @@ public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private TextView mTextSale;
         private TextView mTextPrice;
         private TextView mTextProduct;
-        //private TextView mTextInfo;
         private TextView mTextNumberRatting;
         private RatingBar mRatingBar;
         private RelativeLayout mRelativeSale;
         private ItemPhoneProduct mItemPhoneProduct;
+        private ImageView mImageDelete;
+        private RelativeLayout mRelativeProduct;
 
         ItemPhoneViewHolder(@NonNull View itemView, Context context, OnClickProductListener listener) {
             super(itemView);
@@ -93,11 +96,14 @@ public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mTextSale = itemView.findViewById(R.id.text_sale);
             mTextPrice = itemView.findViewById(R.id.text_price);
             mTextProduct = itemView.findViewById(R.id.text_name_product);
-//            mTextInfo = itemView.findViewById(R.id.text_info_product);
             mRelativeSale = itemView.findViewById(R.id.relative_sale);
             mTextNumberRatting = itemView.findViewById(R.id.text_number_rating);
             mRatingBar = itemView.findViewById(R.id.rating_bar);
+            mImageDelete = itemView.findViewById(R.id.ic_delete_product);
+            mRelativeProduct = itemView.findViewById(R.id.relative_product);
             itemView.setOnClickListener(this);
+            mImageDelete.setOnClickListener(this);
+            mRelativeProduct.setOnClickListener(this);
         }
 
         public void bindData(ItemPhoneProduct itemPhoneProduct) {
@@ -115,7 +121,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mTextPrice.setText(itemPhoneProduct.getPrice());
             mTextProduct.setText(itemPhoneProduct.getTitle());
             if (itemPhoneProduct.getNumberRating().equals("")) {
-                mTextNumberRatting.setText("Chưa có đánh giá");
+                mTextNumberRatting.setText(mContext.getString(R.string.no_rating));
             } else {
                 mTextNumberRatting.setText(itemPhoneProduct.getNumberRating());
             }
@@ -124,7 +130,13 @@ public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            mListener.onClickItemProduct(mItemPhoneProduct);
+            switch (view.getId()) {
+                case R.id.relative_product:
+                    mListener.onClickItemProduct(mItemPhoneProduct);
+                    break;
+                case R.id.ic_delete_product:
+                    mListener.deleteProduct(mItemPhoneProduct);
+            }
         }
     }
 

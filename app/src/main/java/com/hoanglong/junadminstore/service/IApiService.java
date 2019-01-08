@@ -1,6 +1,7 @@
 package com.hoanglong.junadminstore.service;
 
 import com.hoanglong.junadminstore.data.model.category.PhoneCategory;
+import com.hoanglong.junadminstore.data.model.comment.Comment;
 import com.hoanglong.junadminstore.data.model.comment.CommentUpload;
 import com.hoanglong.junadminstore.data.model.home.Home;
 import com.hoanglong.junadminstore.data.model.order.Order;
@@ -53,4 +54,10 @@ public interface IApiService {
 
     @GET("/getComment/{idProduct}")
     Call<CommentUpload> getComment(@Path("idProduct") String idProduct);
+
+    @GET("/deleteComment/{idComment}")
+    Call<Comment> deleteComment(@Path("idComment") String idProduct);
+
+    @GET("/deleteProduct/{idProduct}")
+    Call<ItemPhoneProduct> deleteProduct(@Path("idProduct") String idProduct);
 }

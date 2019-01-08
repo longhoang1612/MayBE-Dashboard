@@ -11,6 +11,9 @@ public class Comment implements Parcelable {
     @SerializedName("date")
     @Expose
     private String mDate;
+    @SerializedName("_id")
+    @Expose
+    private String id;
     @SerializedName("idProduct")
     @Expose
     private String mIdProduct;
@@ -42,6 +45,14 @@ public class Comment implements Parcelable {
         mTitleComment = titleComment;
         mComment = comment;
         mRating = rating;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     protected Comment(Parcel in) {

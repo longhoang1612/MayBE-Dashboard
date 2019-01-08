@@ -1,5 +1,6 @@
 package com.hoanglong.junadminstore.screen.search;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -8,6 +9,7 @@ import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,6 +31,7 @@ import com.hoanglong.junadminstore.screen.phone.detail_product.DetailProductActi
 import com.hoanglong.junadminstore.screen.search.adapter.HistorySearchAdapter;
 import com.hoanglong.junadminstore.screen.search.adapter.SuggestAdapter;
 import com.hoanglong.junadminstore.service.BaseService;
+import com.hoanglong.junadminstore.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +73,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     ImageView mImageSearchVoice;
     private String mSearchKey;
     private List<String> mSuggestSearch;
+    private PhoneAdapter phoneAdapter;
 
     @Override
     protected int getLayoutResources() {
@@ -164,7 +168,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             public void onResponse(@NonNull Call<PhoneProduct> call, @NonNull Response<PhoneProduct> response) {
                 if (response.body() != null) {
                     mProgressSearch.setVisibility(View.GONE);
-                    PhoneAdapter phoneAdapter = new PhoneAdapter(
+                    phoneAdapter = new PhoneAdapter(
                             response.body().getPhoneProduct(),
                             SearchActivity.this);
                     mRecyclerSearch.setAdapter(phoneAdapter);
@@ -231,6 +235,27 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         Intent intent = new Intent(SearchActivity.this, DetailProductActivity.class);
         intent.putExtra("BUNDLE_ITEM_PRODUCT", itemPhoneProduct.getTitle());
         startActivity(intent);
+    }
+
+    @Override
+    public void deleteProduct(final ItemPhoneProduct itemPhoneProduct) {
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle("Xóa sản phẩm")
+                .setMessage("Bạn chắc chắn muốn xóa sản phẩm này?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Utils.deleteProduct(getBaseContext(), itemPhoneProduct);
+                        phoneAdapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     @Override

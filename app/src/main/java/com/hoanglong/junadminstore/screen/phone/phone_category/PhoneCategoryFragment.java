@@ -1,7 +1,9 @@
 package com.hoanglong.junadminstore.screen.phone.phone_category;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import com.hoanglong.junadminstore.screen.phone.all_phone.PhoneFragment;
 import com.hoanglong.junadminstore.screen.phone.detail_product.DetailProductActivity;
 import com.hoanglong.junadminstore.utils.Constant;
 import com.hoanglong.junadminstore.utils.FragmentTransactionUtils;
+import com.hoanglong.junadminstore.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +56,7 @@ public class PhoneCategoryFragment extends BaseActivity implements
     private PhoneCategoryPresenter mPresenter;
     private Category mCategory;
     private List<ItemPhoneProduct> mPhoneProducts;
+    private PhoneAdapter phoneAdapter;
 
     @Override
     protected int getLayoutResources() {
@@ -88,7 +92,7 @@ public class PhoneCategoryFragment extends BaseActivity implements
     }
 
     private void setUpRecyclerProduct(List<ItemPhoneProduct> itemPhoneProducts) {
-        PhoneAdapter phoneAdapter = new PhoneAdapter(itemPhoneProducts, this);
+        phoneAdapter = new PhoneAdapter(itemPhoneProducts, this);
         mRecyclerHighlight.setAdapter(phoneAdapter);
     }
 
@@ -112,8 +116,30 @@ public class PhoneCategoryFragment extends BaseActivity implements
     }
 
     @Override
+    public void deleteProduct(final ItemPhoneProduct itemPhoneProduct) {
+        if (getApplicationContext() == null) return;
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle("Xóa sản phẩm")
+                .setMessage("Bạn chắc chắn muốn xóa sản phẩm này?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Utils.deleteProduct(getApplicationContext(), itemPhoneProduct);
+                        phoneAdapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
     public void onClickItem(ItemPhoneCategory phoneCategory) {
-        if (getFragmentManager() != null) {
+        if (getSupportFragmentManager() != null) {
             FragmentTransactionUtils.addFragment(
                     getSupportFragmentManager(),
                     PhoneFragment.newInstance(phoneCategory),
@@ -167,7 +193,7 @@ public class PhoneCategoryFragment extends BaseActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_see_more:
-                if (getFragmentManager() != null) {
+                if (getSupportFragmentManager() != null) {
                     FragmentTransactionUtils.addFragment(
                             getSupportFragmentManager(),
                             AllPhoneFragment.newInstance(mPhoneProducts),

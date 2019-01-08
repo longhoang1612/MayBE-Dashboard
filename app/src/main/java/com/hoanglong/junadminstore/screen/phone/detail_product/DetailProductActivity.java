@@ -32,6 +32,7 @@ import com.hoanglong.junadminstore.screen.phone.adapter.SaleAdapter;
 import com.hoanglong.junadminstore.screen.phone.adapter.SamplePagerAdapter;
 import com.hoanglong.junadminstore.service.BaseService;
 import com.hoanglong.junadminstore.utils.FragmentTransactionUtils;
+import com.hoanglong.junadminstore.utils.Utils;
 import com.hoanglong.junadminstore.utils.customView.LoopViewPager;
 
 import java.util.ArrayList;
@@ -48,7 +49,6 @@ import retrofit2.Response;
 public class DetailProductActivity extends AppCompatActivity
         implements View.OnClickListener, SamplePagerAdapter.ClickSliderListener, Listener, CommentAdapter.OnClickCommentListener {
 
-    private static final String TAG = DetailProductActivity.class.getName();
     @BindView(R.id.text_sale)
     TextView mTextSale;
     @BindView(R.id.text_title_product)
@@ -292,7 +292,8 @@ public class DetailProductActivity extends AppCompatActivity
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Xóa",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(DetailProductActivity.this, "Xóa", Toast.LENGTH_SHORT).show();
+                        Utils.deleteProduct(getApplicationContext(), itemPhoneProduct);
+                        finish();
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Không",
@@ -402,6 +403,7 @@ public class DetailProductActivity extends AppCompatActivity
 
     @Override
     public void onDeleteComment(Comment comment) {
+        Utils.deleteComment(getApplicationContext(), comment);
         Toast.makeText(this, "Delete Comment", Toast.LENGTH_SHORT).show();
     }
 }
